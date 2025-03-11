@@ -3,6 +3,10 @@ import pandas as pd
 import numpy as np
 import pickle
 
+def load_data():
+    data = pd.read_csv("Ecommerce_Customers.csv")
+    return data
+    
 # Load the trained model and scaler
 model_path = "lr_model.pkl"
 scaler_path = "scaler.pkl"
