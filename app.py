@@ -4,8 +4,9 @@ import numpy as np
 import pickle
 
 # Load the trained model and scaler
-model_path = "/mnt/data/lr_model.pkl"
-scaler_path = "/mnt/data/scaler.pkl"
+model_path = "lr_model.pkl"
+scaler_path = "scaler.pkl"
+
 
 with open(model_path, "rb") as model_file:
     model = pickle.load(model_file)
