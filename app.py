@@ -7,6 +7,10 @@ import pickle
 model_path = "lr_model.pkl"
 scaler_path = "scaler.pkl"
 
+import streamlit as st
+
+st.title("E-commerce Dashboard")
+st.write("Welcome to the Streamlit E-commerce App!")
 
 with open(model_path, "rb") as model_file:
     model = pickle.load(model_file)
