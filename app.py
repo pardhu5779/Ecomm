@@ -11,13 +11,18 @@ def load_data():
 model_path = "lr_model.pkl"
 scaler_path = "scaler.pkl"
 
+import pickle
 import streamlit as st
 
-st.title("E-commerce Dashboard")
-st.write("Welcome to the Streamlit E-commerce App!")
+def load_pickle_file(filepath):
+    try:
+        with open(filepath, "rb") as file:
+            return pickle.load(file)
 
-with open(model_path, "rb") as model_file:
-    model = pickle.load(model_file)
+# Load Model & Scaler
+model = load_pickle_file("lr_model.pkl")
+scaler = load_pickle_file("scaler.pkl")
+
 
 with open(scaler_path, "rb") as scaler_file:
     scaler = pickle.load(scaler_file)
