@@ -6,26 +6,30 @@ import pickle
 def load_data():
     data = pd.read_csv("Ecommerce_Customers.csv")
     return data
-    
-# Load the trained model and scaler
-model_path = "lr_model.pkl"
-scaler_path = "scaler.pkl"
 
 import pickle
 import streamlit as st
 
 def load_pickle_file(filepath):
+        with open(filepath, "rb") as file:
+            return pickle.load(file)
+
+import streamlit as st
+import pickle
+import numpy as np
+
+# Function to load pickle files with error handling
+def load_pickle_file(filepath):
     try:
         with open(filepath, "rb") as file:
             return pickle.load(file)
+    except FileNotFoundError:
+        st.error(f"Error: `{filepath}` not found. Ensure it is uploaded to your GitHub repository.")
+        st.stop()
 
 # Load Model & Scaler
 model = load_pickle_file("lr_model.pkl")
 scaler = load_pickle_file("scaler.pkl")
-
-
-with open(scaler_path, "rb") as scaler_file:
-    scaler = pickle.load(scaler_file)
 
 # Streamlit UI
 st.title("Ecommerce Customer Spending Prediction")
@@ -44,3 +48,4 @@ if st.button("Predict Yearly Spending"):
     prediction = model.predict(input_scaled)
     
     st.success(f"Predicted Yearly Amount Spent: ${prediction[0]:,.2f}")
+
